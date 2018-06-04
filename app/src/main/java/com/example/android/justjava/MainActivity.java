@@ -21,23 +21,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
-    /**
-     * This method is called when the order button is clicked.
-     */
-    public void submitOrder(View view) {
-        String priceMessage = "Total" ;
-        String thankYouMessage = "Thank You!";
-        displayMessage(priceMessage +": R"+ quantity*5 +'\n' + thankYouMessage);
-    }
+
 
     /**
      * This method is called when the plus button is clicked.
      */
     public void increment(View view){
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -45,30 +39,51 @@ public class MainActivity extends AppCompatActivity {
      */
         public void decrement(View view){
         quantity = quantity -1;
-        display(quantity);
+        displayQuantity(quantity);
         }
+
+
+    /**
+     * Calculates the price of the order.
+     *
+     * @param quantity is the number of cups of coffee ordered
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+    }
+
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int displayQuantity) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + displayQuantity);
+    }
+
+    private String createOrderSummery(int Price){
+        String displayMessage = "Name: Shannon \n";
+        displayMessage = displayMessage + "Quantity: " + quantity;
+        displayMessage = displayMessage + "\nTotal R: " + Price;
+        displayMessage = displayMessage + "\nThank you ";
+        return displayMessage;
     }
 
     /**
-     * This method displays the given price on the screen.
+     * This method is called when the order button is clicked.
      */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+    public void submitOrder(View view) {
+        int Price = calculatePrice();
+        String priceMessage = createOrderSummery(Price);
+        displayMessage(priceMessage);
 
+    }
 
     /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 }

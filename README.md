@@ -6,4 +6,4 @@
 <img src="/Screenshot_20180607-151658.png" height="500px">
 
 ##### The email intent with the compiled summary of the order
-<img src="/Untitled" height="500px">
+<img src="/Untitled.png" height="500px">
